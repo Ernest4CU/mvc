@@ -2,7 +2,7 @@
 	class testModel{
 		public function get()
 		 {
-		 	return "Hello world!";
+		 	return "目录结构更改!";
 		 } 
 	}
 ?>

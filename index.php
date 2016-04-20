@@ -7,9 +7,9 @@
 	第五步 视图			->		把第三步取到的数据按用户想要的样子显示出来
 *************************************************************************/
 
-	require_once('testController.class.php');
-	require_once('testModel.class.php');
-	require_once('testView.class.php');
+	require_once('/libs/Controller/testController.class.php');
+	require_once('/libs/Model/testModel.class.php');
+	require_once('/libs/View/testView.class.php');
 	$testController = new testController();
 	$testController->show();
 ?>
