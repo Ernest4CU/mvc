@@ -9,7 +9,7 @@
 		public static $method;
 		private static $config;
 		private static function init_db(){
-			DB::init('mysql', self::$config['dbconfig']);
+			DB::init('mysqliDb', self::$config['dbconfig']);
 		}
 		private static function init_view(){
 			VIEW::init('Smarty', self::$config['viewconfig']);

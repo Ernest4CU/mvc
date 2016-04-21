@@ -7,7 +7,7 @@
 			self::$db->connect($config);//返回connect句柄
 		}
 		
-		public static query($sql){
+		public static function query($sql){
 			return self::$db->query($sql);
 		}
 		
@@ -27,15 +27,15 @@
 		}
 		
 		public static function insert($table,$arr){			
-			return self::$db->findAll($table,$arr);
+			return self::$db->insert($table,$arr);
 		}
 		
 		public static function update($table,$arr,$where){			
-			return self::$db->findAll($table,$arr,$where);
+			return self::$db->update($table,$arr,$where);
 		}
 		
-		public static function insert($table,$where){			
-			return self::$db->findAll($table,$where);
+		public static function del($table,$where){			
+			return self::$db->del($table,$where);
 		}
 	}
 ?>

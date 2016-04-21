@@ -1,6 +1,6 @@
 <?php
 	class mysqliDb{
-		public static self::$con;
+		public static $con;
 		
 		/**
 		报错函数(开发时使用，上线后可注释掉)
@@ -25,7 +25,7 @@
 			if(!(mysqli_select_db(self::$con,$dbname))){//mysqli_select_db选择数据库
 			$this->err(mysqli_error(self::$con));
 			}
-			mysqli_query($dbcharset);
+			mysqli_query(self::$con,$dbcharset);
 		}
 		
 		/**
@@ -34,7 +34,7 @@
 		*@param string $sql
 		*@return bool 返回执行成功、资源或执行失败
 		**/
-		function query($sql){
+		function query($sql){			
 			if(!($query = mysqli_query(self::$con,$sql))){
 				$this->err($sql."<br />".mysql_err());
 			}else{
@@ -49,7 +49,7 @@
 		*@return array 返回列表数组
 		**/
 		function findAll($query){
-			while($rs=mysqli_fetch_assoc($query){
+			while($rs=mysqli_fetch_assoc($query)){
 				$list[] = $rs;
 			}
 			return isset($list)?$list:"";
