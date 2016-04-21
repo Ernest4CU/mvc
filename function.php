@@ -50,4 +50,15 @@
 	function daddslashes($str){
 		return (!get_magic_quotes_gpc())?addslashes($str):$str;
 	}
+	
+	function ORG($path,$name,$params=array()){//path是路径，name是第三方类名 params是该类初始化的时候需要指定、赋值的属性，格式为 array(属性名=>属性值,属性名2=>属性值2······)
+		require_once('libs/ORG/'.$path.$name.'.class.php');
+		$obj = new $name();
+		if(!empty($params)){
+			foreach($params as $key =>$value){
+				$obj->$key = $value;
+			}
+		}
+		return $obj;
+	}
 ?>
