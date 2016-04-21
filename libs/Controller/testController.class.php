@@ -9,7 +9,7 @@
 			$data = $model->get();		
 			$view = ORG('Smarty/','Smarty',$viewconfig);
 			$view->assign('str',$data);
-			$view->display('test.tpl');
+			$view->display('main.tpl');
 					
 		}
 	}
