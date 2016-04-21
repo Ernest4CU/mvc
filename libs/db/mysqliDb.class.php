@@ -1,5 +1,7 @@
 <?php
 	class mysqliDb{
+		public static self::$con;
+		
 		/**
 		报错函数(开发时使用，上线后可注释掉)
 		*
@@ -17,30 +19,23 @@
 		**/
 		function connect($config){
 			extract($config);
-			if(!($con = mysqli_connect($dbhost,$dbuser,$dbpsw))){//mysqli_connect连接数据库
-				$this->err(mysqli_error($con));
+			if(!(self::$con = mysqli_connect($dbhost,$dbuser,$dbpsw))){//mysqli_connect连接数据库
+				$this->err(mysqli_error(self::$con));
 			}
-			return $con;
+			if(!(mysqli_select_db(self::$con,$dbname))){//mysqli_select_db选择数据库
+			$this->err(mysqli_error(self::$con));
+			}
+			mysqli_query($dbcharset);
 		}
 		
-		
-		/**
-		*选择数据库，设置数据库编码
-		**/
-		function select($con,$config){
-			if(!(mysqli_select_db($con,$dbname))){//mysqli_select_db选择数据库
-			$this->err(mysqli_error($con));
-			}
-			mysqli_query($con,$dbcharset);
-		}
 		/**
 		*执行sql语句
 		*
 		*@param string $sql
 		*@return bool 返回执行成功、资源或执行失败
 		**/
-		function query($con,$sql){
-			if(!($query = mysqli_query($con,$sql))){
+		function query($sql){
+			if(!($query = mysqli_query(self::$con,$sql))){
 				$this->err($sql."<br />".mysql_err());
 			}else{
 				return $query;
@@ -89,10 +84,10 @@
 		*@param array $arr 添加数组（包含字段和值的一维数组）
 		*
 		**/
-		function insert($con,$table,$arr){
+		function insert($table,$arr){
 			//$sql = "insert into 表名(多个字段,逗号隔开) values(多个值,逗号隔开)";
 			foreach($arr as $key=>$value){//foreach循环数组
-				$value = mysqli_real_escape_string($con,$value);
+				$value = mysqli_real_escape_string(self::$con,$value);
 				$keyArr[]="`".$key."`";//把$arr数组当中的键名保存在$keyArr当中
 				$valueArr[]="'".$value."'";//把$arr数组当中的键值保存在$valueArr当中,因为值多位字符串，而sql语句里面insert当中如果值是字符串的话要加单引号，所以这个地方要加上单引号
 			}
@@ -100,7 +95,7 @@
 			$values = implode(",",$valueArr);
 			$sql = "insert into ".$table."(".$keys.") values(".$values.")";
 			$this->query($sql);
-			return mysqli_insert_id($con);
+			return mysqli_insert_id(self::$con);
 		}
 		
 		/**
@@ -110,15 +105,15 @@
 		*@param array $arr 修改数组（包含字段和值的一维数组）
 		*@param string $where 条件
 		**/
-		function update($con,$table,$arr,$where){
+		function update($table,$arr,$where){
 			//update 表名 set 字段=字段值 where ……
 			foreach($arr as $key=>$value){
-				$value = mysqli_real_escape_string($con,$value);
+				$value = mysqli_real_escape_string(self::$con,$value);
 				$keyAndvalueArr[]="`".$key."`='".$value."'";//把$arr数组当中的键名保存在$keyArr当中
 			}
 			$keyAndvalueArr = implode(",",$keyAndvalueArr);
 			$sql = "update ".$table." set ".$keyAndvalueArr." where ".$where;
-			$this->query($con,$sql);
+			$this->query($sql);
 		}
 		
 		/**
