@@ -6,10 +6,8 @@
 	第四步 控制器		->		按指令选取相应视图
 	第五步 视图			->		把第三步取到的数据按用户想要的样子显示出来
 *************************************************************************/
-
-	require_once('/libs/Controller/testController.class.php');
-	require_once('/libs/Model/testModel.class.php');
-	require_once('/libs/View/testView.class.php');
-	$testController = new testController();
-	$testController->show();
+	header("Content-type:text/html;charset=utf8");
+	require_once('function.php');
+	C('test','show');
+	
 ?>
