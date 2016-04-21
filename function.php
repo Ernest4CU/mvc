@@ -1,6 +1,5 @@
 <?php
-	function C($name,$method)//第一个是控制器的名字，第二个是方法
-		{
+	function C($name,$method){//第一个是控制器的名字，第二个是方法
 		/*
 		1.先引入文件
 		2.实例化
@@ -22,8 +21,7 @@
 		*/
 	}
 	
-	function M($name)
-	{
+	function M($name){
 		require_once('/libs/Model/'.$name.'Model.class.php');
 		eval('$obj = new '.$name.'Model();');
 		return $obj;
@@ -38,8 +36,7 @@
 		*/
 	}
 	
-	function V($name)
-	{
+	function V($name){
 		require_once('/libs/View/'.$name.'View.class.php');
 		eval('$obj = new '.$name.'View();');
 		return $obj;
@@ -50,4 +47,7 @@
 		*/		
 	}
 	
+	function daddslashes($str){
+		return (!get_magic_quotes_gpc())?addslashes($str):$str;
+	}
 ?>

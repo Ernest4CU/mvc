@@ -1,13 +1,10 @@
 <?php
-/*************************************************************************
-	第一步 浏览者		->		调用控制器，对他发出指令
-	第二步 控制器		->		按指令选取一个合适的模型
-	第三步 模型			->		按控制器指令去相应的数据
-	第四步 控制器		->		按指令选取相应视图
-	第五步 视图			->		把第三步取到的数据按用户想要的样子显示出来
-*************************************************************************/
 	header("Content-type:text/html;charset=utf8");
 	require_once('function.php');
-	C('test','show');
-	
+	$controllerAllow=array('test','index');
+	$methodAllow=array('show','index');
+	//统一的Url格式  index.php?controller=控制器名&method=方法名
+	$controller=in_array($_GET['controller'],$controllerAllow)?daddslashes($_GET['controller']):'index';	
+	$method=in_array($_GET['method'],$methodAllow)?daddslashes($_GET['method']):'index';
+	C($controller,$method);
 ?>
