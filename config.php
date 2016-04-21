@@ -11,7 +11,7 @@ $config = array(
 		'dbhost' => 'localhost',
 		'dbuser' => 'root',
 		'dbpsw' => '',
-		'dbname' => 'test',
+		'dbname' => 'tempdata',
 		'dbcharset' => 'utf8'
 	)
 );

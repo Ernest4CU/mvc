@@ -3,7 +3,7 @@
 		//视图引擎的调用
 		public function show($data)
 		 {
-		 	VIEW::$view->assign('str',"Smart测试");
+		 	VIEW::$view->assign('str',$data);
 			VIEW::$view->display('test.tpl');
 		 } 
 	}
