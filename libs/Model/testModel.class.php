@@ -2,7 +2,7 @@
 	class testModel{
 		public function get()
 		 {
-		 	return "目录结构更改测试!";
+		 	return "基于mvc框架的smarty视图引擎的框架!";
 		 } 
 	}
 ?>

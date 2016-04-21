@@ -4,10 +4,13 @@
 		//模型用来处理或提取数据
 		//视图用来做界面显示
 		function show(){
+			require('config.php');//配置文件引用
 			$model = M('test');
-			$data = $model->get();
-			$view = V('test');
-			$view ->display($data);			
+			$data = $model->get();		
+			$view = ORG('Smarty/','Smarty',$viewconfig);
+			$view->assign('str',$data);
+			$view->display('test.tpl');
+					
 		}
 	}
 ?>
