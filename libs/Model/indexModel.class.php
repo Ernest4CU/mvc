@@ -1,8 +1,10 @@
 <?php
 	class indexModel{
 		public function get()
-		 {
-		 	return "后端处理数据";
+		 {		 
+			$result = DB::$db->query("SELECT * FROM temperature");
+			$data = DB::$db->findAll($result);			
+			return $data['0']['temperature'];
 		 } 
 	}
 ?>

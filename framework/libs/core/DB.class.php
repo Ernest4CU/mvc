@@ -20,11 +20,11 @@
 			$query = self::$db->query($sql);
 			return self::$db->findOne($query);
 		}
-		
+		/*暂时还不能用
 		public static function findResult($sql,$row = 0,$filed = 0){
 			$query = self::$db->query($sql);
 			return self::$db->findAll($query,$row,$filed);
-		}
+		}*/
 		
 		public static function insert($table,$arr){			
 			return self::$db->insert($table,$arr);
