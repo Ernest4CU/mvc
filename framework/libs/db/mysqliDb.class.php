@@ -36,7 +36,7 @@
 		**/
 		function query($sql){			
 			if(!($query = mysqli_query(self::$con,$sql))){
-				$this->err($sql."<br />".mysql_err());
+				$this->err($sql."<br />".mysqli_error());
 			}else{
 				return $query;
 			}
@@ -72,10 +72,10 @@
 		*@param soruce $query sql语句通过mysql_query执行出来的资源
 		*@return array 返回指定行的指定字段的值
 		**/
-		function findResult($query,$row=0,$field=0){
+	/*	function findResult($query,$row=0,$field=0){
 			$rs=mysqli_result($query,$row,$field);			
 			return $rs;
-		}
+		}*/
 		
 		/**
 		*添加
@@ -93,7 +93,8 @@
 			}
 			$keys = implode(",",$keyArr);//implode函数是把数组组合成字符串 implode(分隔符,数组)；
 			$values = implode(",",$valueArr);
-			$sql = "insert into ".$table."(".$keys.") values(".$values.")";
+			$sql = "INSERT INTO ".$table."(".$keys.") VALUES(".$values.")";
+			//INSERT INTO temperature(temperature) VALUES ('33.33')
 			$this->query($sql);
 			return mysqli_insert_id(self::$con);
 		}
@@ -112,7 +113,7 @@
 				$keyAndvalueArr[]="`".$key."`='".$value."'";//把$arr数组当中的键名保存在$keyArr当中
 			}
 			$keyAndvalueArr = implode(",",$keyAndvalueArr);
-			$sql = "update ".$table." set ".$keyAndvalueArr." where ".$where;
+			$sql = "UPDATE ".$table." SET ".$keyAndvalueArr." WHERE ".$where;			
 			$this->query($sql);
 		}
 		
