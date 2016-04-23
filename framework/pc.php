@@ -5,8 +5,8 @@
 		include_once($currentdir.'/'.$path);
 	}
 	class PC{
-		public static $controllerAllow=array('test','index');
-		public static $methodAllow=array('show','index');
+		public static $controllerAllow=array('index');
+		public static $methodAllow=array('index');
 		public static $controller;
 		public static $method;
 		private static $config;
